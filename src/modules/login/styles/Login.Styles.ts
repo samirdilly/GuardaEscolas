@@ -18,9 +18,7 @@ export const ImageLogo = styled.Image`
     margin-bottom: 10px;
  `;
 
- export const CadastroButton = styled.TouchableOpacity`
 
- `;
  export const TextCadastro = styled.Text`
     font-family: Poppins-Bold;
     color: #29378e;
