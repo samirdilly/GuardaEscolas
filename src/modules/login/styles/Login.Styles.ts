@@ -24,6 +24,12 @@ export const ImageLogo = styled.Image`
  export const TextCadastro = styled.Text`
     font-family: Poppins-Bold;
     color: #29378e;
-    
- 
+ `;
+
+ export const TextError = styled.Text`
+
+    font-family: Poppins-SemiBold;
+    font-size: 10px;
+    color: red;
+
  `;
