@@ -18,7 +18,7 @@ export default class ConnectionAPI {
             case MethodEnum.PUT:
             case MethodEnum.PATCH:
             default:
-                return (await axios[method]<T>(url)).data;
+                return (await axios[method]<T>(url, body)).data;
         }
     }
 
