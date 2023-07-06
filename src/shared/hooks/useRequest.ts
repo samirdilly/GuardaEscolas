@@ -5,17 +5,21 @@ import { connectionAPIPost } from "../functions/connection/connectionAPI";
 
 import { useNavigation } from "@react-navigation/native";
 import { setAuthorizationToken } from "../functions/connection/auth";
+import { ReturnLogin } from "../types/returnLogin";
 
 
 
 export const useRequest = () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
     const navigation = useNavigation();
     const authRequest = async (body: RequestLogin) => {
-        await connectionAPIPost('http://192.168.254.165/apijwt/login', body)
+        await connectionAPIPost<ReturnLogin>('http://192.168.254.165/apijwt/login', body)
         .then((result) => {
-            setAuthorizationToken(result)
-            console.log(result)
+            // setAuthorizationToken(result.token)
+            setEmail(result.email)
+            console.log(result.email)
+            console.log(result.token)
             navigation.navigate("Home")
         })
         .catch(() => {
@@ -26,6 +30,7 @@ export const useRequest = () => {
     return{
         errorMessage,
         authRequest,
-        setErrorMessage
+        setErrorMessage,
+        email,
     }
 }

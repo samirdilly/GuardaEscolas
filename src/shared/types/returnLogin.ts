@@ -1,3 +1,4 @@
 export interface ReturnLogin {
-    acessToken:string;
+    token:string;
+    email: string
 }

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonEntrar from "../../../shared/components/button/ButtonEntrar";
 import Input from "../../../shared/components/input/Input";
 import { ContainerLogin, ImageLogo } from "../styles/Login.Styles";
 import { useLogin } from "../hooks/useLogin";
+import { connectionAPIGet } from "../../../shared/functions/connection/connectionAPI";
+import { ReturnLogin } from "../../../shared/types/returnLogin";
 
 
 
@@ -17,6 +19,9 @@ const Login = ({navigation}:any) => {
         handleOnChangePassword,
     } = useLogin();
 
+
+    
+
     React.useLayoutEffect(() => {
         navigation.setOptions({headerShown: false});
         
@@ -29,7 +34,7 @@ const Login = ({navigation}:any) => {
         <ContainerLogin>
             <ImageLogo resizeMode="contain" source={require('../../../assets/guardaMunicipalLogo.png')}/>
             <Input value={email} errorMessage={errorMessage} onChange={handleOnChangeEmail} title="Usuário:"/>
-            <Input value={senha} errorMessage={errorMessage} onChange={handleOnChangePassword} title="Senha:"/>
+            <Input secureTextEntry value={senha} errorMessage={errorMessage} onChange={handleOnChangePassword} title="Senha:"/>
             <ButtonEntrar onPress={handleOnPress}/>
             <ButtonEntrar onPress={() => navigation.navigate('TestLogin')}/>
         </ContainerLogin>
