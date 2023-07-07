@@ -1,9 +1,9 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { MethodEnum } from "../../enums/methods.enum";
 import { getAuthorizationToken } from "./auth";
+import { useState } from "react";
 
 export type MethodType = 'get' | 'delete' | 'post' | 'put' | 'patch' ;
-
 
 
 export default class ConnectionAPI {
@@ -15,7 +15,7 @@ export default class ConnectionAPI {
 
         const config: AxiosRequestConfig = {
             headers: {
-              Authorization: token,
+              Authorization: `Bearer ${token}`,
               'Content-Type': 'application/json',
             }
         }
