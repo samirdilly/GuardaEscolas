@@ -4,22 +4,22 @@ import { RequestLogin } from "../types/requestLogin";
 import { connectionAPIPost } from "../functions/connection/connectionAPI";
 
 import { useNavigation } from "@react-navigation/native";
-import { getAuthorizationToken, setAuthorizationToken } from "../functions/connection/auth";
+import { setAuthorizationToken } from "../functions/connection/auth";
 import { ReturnLogin } from "../types/returnLogin";
-import { AtivaAlarme } from "../types/requestAlarme";
-import axios, { AxiosRequestConfig } from "axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { TextCadastro } from "../../modules/login/styles/Login.Styles";
+import { useDispatch } from "react-redux";
 
 
+    
 
 export const useRequest =  () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
-    const [email, setEmail] = useState<string>('');
+    const [retorno, setRetorno] = useState<unknown>('');
     const navigation = useNavigation();
-    
+  
    
     const authRequest = async (body: RequestLogin) => {
-        await connectionAPIPost<ReturnLogin>('https://ti.guaira.pr.gov.br/apijwt/login', body)
+        await connectionAPIPost<ReturnLogin>('http://192.168.254.165/apijwt/login', body)
         .then((result) => {
             setAuthorizationToken(result.token)
             
@@ -33,25 +33,26 @@ export const useRequest =  () => {
  
     
 
-    const ativaAlarme = async () => {
-        await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/alarme/ativa', '\r\n')
-        .then((result) => {
-            console.log(result)
-        })
-        .catch(() => {
-            setErrorMessage('Usuário ou Senha inválidos');
-        });
+    // const ativaAlarme = async () => {
+    //     await connectionAPIPost('http://192.168.254.165/apijwt/api/alarme/ativa', '\r\n')
+    //     .then((result) => {
+    //         console.log(result)
 
-    }
-   
-    
-    console.log(email)
+    //         const texto = result
+
+    //         setRetorno(texto)
+            
+    //     })
+    //     .catch(() => {
+    //         setErrorMessage('Alerta Não enviado');
+    //     });
+
+    // }
 
     return{
         errorMessage,
         authRequest,
         setErrorMessage,
-        ativaAlarme,
-
+        retorno,
     }
 }

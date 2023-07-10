@@ -24,8 +24,8 @@ const ButtonInfo = () => {
     }
     return(
     <ContainerGrid>
-            <ModalSuporte isVisible={modalVisible} closeModal={closeModal} content="Teste Modal"/>
-            <ModalFale isVisible={modalFaleVisible} closeModal={closeModalFale} content="Teste Modal 1"/>
+            <ModalSuporte isVisible={modalVisible} closeModal={closeModal}/>
+            <ModalFale isVisible={modalFaleVisible} closeModal={closeModalFale} />
             <ButtonInfoContainer onPress={openModalFale}>
                 <TextInfo>Fale Conosco</TextInfo>
             </ButtonInfoContainer>
@@ -34,7 +34,7 @@ const ButtonInfo = () => {
                 <TextInfo>Suporte</TextInfo>
             </ButtonInfoContainer>
            
-        </ContainerGrid>
+    </ContainerGrid>
     )
 }
 

@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 
 
-export const ContainerLogin = styled.View`
+export const ContainerLogin = styled.SafeAreaView`
     height: 100%;
     width: 100%;
     background-color: white;

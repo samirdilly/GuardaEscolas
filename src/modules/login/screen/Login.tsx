@@ -36,7 +36,6 @@ const Login = ({navigation}:any) => {
             <Input value={email} errorMessage={errorMessage} onChange={handleOnChangeEmail} title="Usuário:"/>
             <Input secureTextEntry value={senha} errorMessage={errorMessage} onChange={handleOnChangePassword} title="Senha:"/>
             <ButtonEntrar onPress={handleOnPress}/>
-            <ButtonEntrar onPress={() => navigation.navigate('TestLogin')}/>
         </ContainerLogin>
     );
 }

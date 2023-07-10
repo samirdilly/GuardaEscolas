@@ -9,7 +9,7 @@ export const ContainerGrid = styled.View`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-top: 85% ;
+    margin-top: 30%;
     
     
 
@@ -18,7 +18,7 @@ export const ContainerGrid = styled.View`
 
 
 export const ButtonInfoContainer = styled.TouchableOpacity`
-    margin-top: 25px;
+    
     width: 150px;
     height: 50px;
     margin: 10px;

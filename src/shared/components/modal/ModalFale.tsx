@@ -1,8 +1,9 @@
 import { Modal, Text } from "react-native";
 import { ModalContainer, ModalFaleContainer, ModalFaleView, ModalView } from "./Modal.Style";
 import { ButtonInfoContainer, TextInfo } from "../buttonInfo/ButtonInfo.Styles";
+import { TextCadastro } from "../../../modules/login/styles/Login.Styles";
 
-const ModalFale = ({ isVisible, closeModal, content }) => {
+const ModalFale = ({ isVisible, closeModal }: any) => {
 
 
     return(
@@ -14,7 +15,8 @@ const ModalFale = ({ isVisible, closeModal, content }) => {
             >
             <ModalFaleContainer>
                 <ModalFaleView>
-                    <Text>{content}</Text>
+                    <TextCadastro>Guarda Municipal:</TextCadastro>
+                    <TextCadastro>3642-2800</TextCadastro>
                     <ButtonInfoContainer onPress={closeModal} >
                         <TextInfo>SAIR</TextInfo>
                     </ButtonInfoContainer>

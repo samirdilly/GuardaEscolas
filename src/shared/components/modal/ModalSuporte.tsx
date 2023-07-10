@@ -5,8 +5,9 @@ import { Modal } from "react-native";
 import ButtonInfo from "../buttonInfo/ButtonInfo";
 import { ButtonInfoContainer, TextInfo } from "../buttonInfo/ButtonInfo.Styles";
 import { ModalContainer, ModalView } from "./Modal.Style";
+import { TextCadastro } from "../../../modules/login/styles/Login.Styles";
 
-const ModalSuporte = ({ isVisible, closeModal, content }) => {
+const ModalSuporte = ({ isVisible, closeModal }: any) => {
 
 
     return(
@@ -18,7 +19,8 @@ const ModalSuporte = ({ isVisible, closeModal, content }) => {
             >
             <ModalContainer>
                 <ModalView>
-                    <Text>{content}</Text>
+                    <TextCadastro>Informática Prefeitura: </TextCadastro>
+                    <TextCadastro>3642-9970</TextCadastro>
                     <ButtonInfoContainer onPress={closeModal} >
                         <TextInfo>SAIR</TextInfo>
                     </ButtonInfoContainer>
