@@ -19,7 +19,7 @@ export const useRequest =  () => {
   
    
     const authRequest = async (body: RequestLogin) => {
-        await connectionAPIPost<ReturnLogin>('http://192.168.254.165/apijwt/login', body)
+        await connectionAPIPost<ReturnLogin>('https://ti.guaira.pr.gov.br/apijwt/login', body)
         .then((result) => {
             setAuthorizationToken(result.token)
             

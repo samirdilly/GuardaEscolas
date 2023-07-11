@@ -1,11 +1,17 @@
 
-import { View } from "react-native";
+import { TouchableOpacityProps, View } from "react-native";
 import { ImageSos, MensagemAlertaContainer, Sos, TextAlerta } from "./SosButton.Style";
 import { connectionAPIPost } from "../../functions/connection/connectionAPI";
 
 import React, { useState } from "react";
 
-const SosButton = () => {
+
+interface ButtonProps extends TouchableOpacityProps{
+    disabled?:boolean;
+}
+
+
+const SosButton = ({disabled}: ButtonProps) => {
 
     const [isVisible, setIsVisible] = useState(true);
     const [retorno, setRetorno] = useState<String>('');
@@ -19,12 +25,16 @@ const SosButton = () => {
 
     const ativaAlarme = async () => {
 
-        await connectionAPIPost('http://192.168.254.165/apijwt/api/alarme/ativa', '\r\n')
+        await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/alarme/ativa', '\r\n')
         .then((result) => {
             console.log(result)
-            if(result) {
+            if(result === "Alterado com Sucesso") {
                 setRetorno("Alarme enviado com sucesso !")
             }
+            else {
+                setRetorno("Alarme já ativo !")
+            }
+
         })
 
         };

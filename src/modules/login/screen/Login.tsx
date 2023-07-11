@@ -5,6 +5,7 @@ import { ContainerLogin, ImageLogo } from "../styles/Login.Styles";
 import { useLogin } from "../hooks/useLogin";
 import { connectionAPIGet } from "../../../shared/functions/connection/connectionAPI";
 import { ReturnLogin } from "../../../shared/types/returnLogin";
+import { getAuthorizationToken } from "../../../shared/functions/connection/auth";
 
 
 
@@ -19,6 +20,16 @@ const Login = ({navigation}:any) => {
         handleOnChangePassword,
     } = useLogin();
 
+
+    useEffect(() => {
+        const test = async () => {
+            const token = await getAuthorizationToken();
+            if(token) {
+                navigation.navigate("Home")
+            }
+        } 
+        test();
+    }, []);
 
     
 
