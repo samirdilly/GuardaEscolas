@@ -1,8 +1,9 @@
 import { TextInputProps, View } from "react-native";
 import { DiplayFlexColumm } from "../globalStyles/GlobalView.styles";
-import { ContainerInput, TitleText } from "./Input.Style";
+import { ContainerInput, IconEye, TitleText } from "./Input.Style";
 import { useState } from "react";
 import { TextError } from "../../../modules/login/styles/Login.Styles";
+import { Icon } from "../icon/icon";
 
 
 interface InputProps extends TextInputProps {
@@ -24,8 +25,10 @@ const Input = ({title, errorMessage, secureTextEntry, ...props}: InputProps) => 
         {title && (
             <TitleText>{title}</TitleText>
         )}
+        
     <View>
         <ContainerInput hasSecureTextEntry={secureTextEntry} secureTextEntry={currentSecure} isError={!!errorMessage} {...props}/>
+        {secureTextEntry &&<IconEye onPress={handleOnpressEye} name={currentSecure ? 'eye' : 'eye-blocked'} size={20}/>}
     </View>
     {errorMessage &&(
         <TextError>

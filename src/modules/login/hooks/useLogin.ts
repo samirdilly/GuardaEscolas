@@ -3,6 +3,7 @@ import { useState } from "react";
 import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
 import ConnectionAPI, { connectionAPIPost } from "../../../shared/functions/connection/connectionAPI";
 import { useRequest } from "../../../shared/hooks/useRequest";
+import { unsetAuthorizationToken } from "../../../shared/functions/connection/auth";
 
 export const useLogin = () => {
     const [email, setEmail] = useState<string>('');
@@ -16,6 +17,8 @@ export const useLogin = () => {
             email,
             senha
          })
+
+      
 
         // setLoading(true);
 

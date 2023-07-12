@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import { Icon } from "../icon/icon";
 
 export const ContainerInput = styled.TextInput`
     width: 100%;
@@ -16,4 +17,13 @@ export const TitleText = styled.Text`
     font-size: 13px;
     margin: 4px 0px 4px 4px;
     font-family: Poppins-SemiBold;
+`;
+
+
+export const IconEye = styled(Icon)`
+
+  position: absolute;
+  right: 16px;
+  top: 12px;
+
 `;
