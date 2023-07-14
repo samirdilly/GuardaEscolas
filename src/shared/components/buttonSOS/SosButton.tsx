@@ -4,6 +4,7 @@ import { ImageSos, MensagemAlertaContainer, Sos, TextAlerta } from "./SosButton.
 import { connectionAPIPost } from "../../functions/connection/connectionAPI";
 
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 
 interface ButtonProps extends TouchableOpacityProps{
@@ -15,13 +16,7 @@ const SosButton = ({disabled}: ButtonProps) => {
 
     const [isVisible, setIsVisible] = useState(true);
     const [retorno, setRetorno] = useState<String>('');
-    
-    const exibirTexto = () => {
-        setIsVisible(true);
-        setTimeout(() => {
-          setIsVisible(false);
-        }, 5000);
-      };
+    const navigation = useNavigation();
 
     const ativaAlarme = async () => {
 
@@ -34,10 +29,20 @@ const SosButton = ({disabled}: ButtonProps) => {
             else {
                 setRetorno("Alarme já ativo !")
             }
+            
 
-        })
+        }).catch((error) =>  {if(error){navigation.navigate("Login")}} )     
+        
 
         };
+
+        const exibirTexto = () => {
+            setIsVisible(true);
+            setTimeout(() => {
+              setIsVisible(false);
+            }, 6000);
+          };
+
 
 
     return(
