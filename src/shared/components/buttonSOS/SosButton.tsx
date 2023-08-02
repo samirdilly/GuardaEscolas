@@ -1,6 +1,6 @@
 
 import { TouchableOpacityProps, View } from "react-native";
-import { ImageSos, MensagemAlertaContainer, Sos, TextAlerta } from "./SosButton.Style";
+import { ImageSos, MensagemAlertaContainer, Sos, TextAlerta, TextStatus, TextStatusContainer } from "./SosButton.Style";
 import { connectionAPIPost } from "../../functions/connection/connectionAPI";
 
 import React, { useEffect, useState } from "react";
@@ -18,7 +18,9 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
     const [isVisible, setIsVisible] = useState(true);
     const [retorno, setRetorno] = useState<String>('');
     const navigation = useNavigation();
-
+    const [isConditionMet, setIsConditionMet] = useState(false);
+    const [currentImage, setCurrentImage] = useState(1);
+    const [status, setStatus] = useState("");
 
 
     const ativaAlarme = async () => {
@@ -39,31 +41,32 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
 
         };
 
-
-
-        const [currentImage, setCurrentImage] = useState(1);
-
-
         const images = [
             require('../../../assets/sos_amarelo.png'),
             require('../../../assets/sos_verde.png'),
             require('../../../assets/sos_vermelho.png'),
           ];
 
-
-
-        const [status, setStatus] = useState("");
-      
-   
         const fetchDataFromApi = async () => {
             await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/alarme/status', '\r\n')
                 .then((result) => {
                     console.log(result)
-                    if (result === "desativado") {
+
+                    if (result === "ativo") {
+                        setStatus("O alarme esta ativo !");
+                        setCurrentImage(0);
+                        setIsConditionMet(false)
+                    }
+                    else if (result === "desativado") {
                         setStatus("Unidades estao se deslocando !")
                         setCurrentImage(1)
+                        setIsConditionMet(false)
                     }
-
+                    else {
+                        setStatus("");
+                        setCurrentImage(2);
+                        setIsConditionMet(true)
+                    }
                 });
             };
 
@@ -78,18 +81,6 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
                 return () => clearInterval(interval);
               }, []);
 
-
-                const alteraBotao = async () => {
-                    await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/alarme/status', '\r\n')
-                        .then((result) => {
-                            console.log(result);
-                            if (result === "ativo") {
-                                setStatus("O alarme esta ativo !");
-                                setCurrentImage(0);
-                            }
-                        });
-                };
-
                 const exibirTexto = () => {
                     setIsVisible(true);
                     setTimeout(() => {
@@ -97,18 +88,17 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
                     }, 6000);
                 };
 
-
-
-
                 return (
                     <>
                         <MensagemAlertaContainer>
                             {isVisible && <TextAlerta>{retorno}</TextAlerta>}
                         </MensagemAlertaContainer>
-                        <Sos onPress={() => { ativaAlarme(); exibirTexto(); alteraBotao(); } }>
+                        <Sos disabled={!isConditionMet} onPress={() => { ativaAlarme(); exibirTexto(); } }>
                             <ImageSos source={images[currentImage]} />
                         </Sos>
-                        <TextAlerta>{status}</TextAlerta>
+                        <TextStatusContainer>
+                            <TextStatus>{status}</TextStatus>
+                        </TextStatusContainer>
                     </>
                 );
             }
