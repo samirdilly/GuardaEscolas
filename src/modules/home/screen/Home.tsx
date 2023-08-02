@@ -1,10 +1,11 @@
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonInfo from "../../../shared/components/buttonInfo/ButtonInfo";
 import SosButton from "../../../shared/components/buttonSOS/SosButton";
 import Footer from "../../../shared/components/footer/Footer";
 import { HomeContainer } from "../styles/Home.Styles";
 import { connectionAPIPost } from "../../../shared/functions/connection/connectionAPI";
+import { TextAlerta } from "../../../shared/components/buttonSOS/SosButton.Style";
 
 
 
@@ -12,19 +13,28 @@ import { connectionAPIPost } from "../../../shared/functions/connection/connecti
 
 const Home = ({navigation}:any) => {
     
-    
-    // const test = async () => {
-    //     const resultBack = await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/usuario/validarToken', '\r\n').catch(() => undefined);
-    //     console.log(resultBack);
-    //     if(!resultBack) {
-    //         navigation.navigate("Login")
-    //     }
-    // };
-   
-    //     setTimeout(() => {
-    //             test();
-    //     }, 1000);
+    const [status, setStatus] = useState("");
       
+    // setTimeout(() => {
+        
+    //     connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/alarme/status', '\r\n')
+    //         .then((result) => {
+    //             console.log(result)
+    //             if (result === "ativo"){
+    //                 setStatus("O alarme esta ativo !")
+    //             }
+    //             if (result === "desativado") {
+    //                 setStatus("Unidades estao se deslocando !")
+    //             }
+    //             else{
+    //                 setStatus("")
+    //             }
+    //         });
+    // }, 6000);
+
+    console.log(status);
+
+    
 
 
     
@@ -37,7 +47,8 @@ const Home = ({navigation}:any) => {
     }, [navigation]);
     return(
         <HomeContainer>
-            <SosButton/>
+            <SosButton />
+            <TextAlerta>{status}</TextAlerta>
             <ButtonInfo/> 
             <Footer/>
         </HomeContainer>
