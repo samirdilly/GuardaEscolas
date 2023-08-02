@@ -96,9 +96,9 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
                         <Sos disabled={!isConditionMet} onPress={() => { ativaAlarme(); exibirTexto(); } }>
                             <ImageSos source={images[currentImage]} />
                         </Sos>
-                        <TextStatusContainer>
+
                             <TextStatus>{status}</TextStatus>
-                        </TextStatusContainer>
+
                     </>
                 );
             }
