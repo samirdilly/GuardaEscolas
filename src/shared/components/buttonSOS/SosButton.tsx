@@ -1,6 +1,6 @@
 
-import { TouchableOpacityProps, View } from "react-native";
-import { ImageSos, MensagemAlertaContainer, Sos, TextAlerta, TextStatus, TextStatusContainer } from "./SosButton.Style";
+import { Text, TouchableOpacityProps, View } from "react-native";
+import { ImageSos, MensagemAlertaContainer, Sos, TextAlerta, TextNome, TextStatus, TextStatusContainer } from "./SosButton.Style";
 import { connectionAPIPost } from "../../functions/connection/connectionAPI";
 
 import React, { useEffect, useState } from "react";
@@ -21,6 +21,7 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
     const [isConditionMet, setIsConditionMet] = useState(false);
     const [currentImage, setCurrentImage] = useState(1);
     const [status, setStatus] = useState("");
+    const [nome, setNome] = useState("");
 
 
     const ativaAlarme = async () => {
@@ -28,12 +29,12 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
         await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/alarme/ativa', '\r\n')
         .then((result) => {
             console.log(result)
-            if(result === "Alterado com Sucesso") {
-                setRetorno("Alarme enviado com sucesso !")
-            }
-            else {
-                setRetorno("Alarme já ativo !")
-            }
+            // if(result === "Alterado com Sucesso") {
+            //     setRetorno("Alarme enviado com sucesso !")
+            // }
+            // else {
+            //     setRetorno("Alarme já ativo !")
+            // }
             
 
         }).catch((error) =>  {if(error){navigation.navigate("Login")}} )     
@@ -51,13 +52,14 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
             await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/alarme/status', '\r\n')
                 .then((result) => {
                     console.log(result)
+                    setNome(result.nome)
 
-                    if (result === "ativo") {
+                    if (result.status === "ativo") {
                         setStatus("O alarme esta ativo !");
                         setCurrentImage(0);
                         setIsConditionMet(false)
                     }
-                    else if (result === "desativado") {
+                    else if (result.status === "desativado") {
                         setStatus("Unidades estao se deslocando !")
                         setCurrentImage(1)
                         setIsConditionMet(false)
@@ -90,9 +92,10 @@ const SosButton = ({disabled, onPress}: ButtonProps) => {
 
                 return (
                     <>
-                        <MensagemAlertaContainer>
+                        <TextNome>{nome}</TextNome>
+                        {/* <MensagemAlertaContainer>
                             {isVisible && <TextAlerta>{retorno}</TextAlerta>}
-                        </MensagemAlertaContainer>
+                        </MensagemAlertaContainer> */}
                         <Sos disabled={!isConditionMet} onPress={() => { ativaAlarme(); exibirTexto(); } }>
                             <ImageSos source={images[currentImage]} />
                         </Sos>

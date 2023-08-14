@@ -6,13 +6,17 @@ import Footer from "../../../shared/components/footer/Footer";
 import { HomeContainer } from "../styles/Home.Styles";
 import { connectionAPIPost } from "../../../shared/functions/connection/connectionAPI";
 import { TextAlerta } from "../../../shared/components/buttonSOS/SosButton.Style";
+import { Text } from "react-native";
+import { useRequest } from "../../../shared/hooks/useRequest";
 
 
 
 
 
 const Home = ({navigation}:any) => {
-    
+
+
+
     const [status, setStatus] = useState("");
       
     // setTimeout(() => {
@@ -34,7 +38,7 @@ const Home = ({navigation}:any) => {
 
     console.log(status);
 
-    
+            
 
 
     

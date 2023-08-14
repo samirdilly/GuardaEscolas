@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 export const useRequest =  () => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [retorno, setRetorno] = useState<unknown>('');
+    const [nome, setNome] = useState<String>('');
     const navigation = useNavigation();
   
    
@@ -24,12 +25,19 @@ export const useRequest =  () => {
             setAuthorizationToken(result.token)
             
             console.log(result.token)
+            // console.log(result.nome)
+            setNome(result.nome)
+
+            if (result.nome){
+                setNome(result.nome)
+            }
             navigation.navigate("Home")
         })
         .catch(() => {
             setErrorMessage('Usuário ou Senha inválidos');
         });
     };
+    console.log(nome)
  
     
 
@@ -54,5 +62,6 @@ export const useRequest =  () => {
         authRequest,
         setErrorMessage,
         retorno,
+        nome
     }
 }
