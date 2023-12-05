@@ -5,7 +5,7 @@ import { ContainerLogin, ImageLogo } from "../styles/Login.Styles";
 import { useLogin } from "../hooks/useLogin";
 import { getAuthorizationToken, unsetAuthorizationToken } from "../../../shared/functions/connection/auth";
 import { connectionAPIGet, connectionAPIPost } from "../../../shared/functions/connection/connectionAPI";
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
 
 
 
@@ -39,14 +39,16 @@ const Login = () => {
     //     }, 50000);
     // }
     const navigation = useNavigation();
+
     useEffect(() => {
         const test = async () => {
-            const resultBack = await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt/api/usuario/validarToken', '\r\n').catch(() => undefined);
-            console.log(resultBack);
+            const resultBack = await connectionAPIPost('https://ti.guaira.pr.gov.br/apijwt_teste/api/usuario/validarToken', '\r\n').catch(() => undefined);
+            
 
             if(resultBack == true) {
-                navigation.navigate("Home")
+                navigation.dispatch(StackActions.replace('Home'))            
             }
+            
         };
         test();
     }, []);

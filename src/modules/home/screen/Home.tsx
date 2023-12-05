@@ -38,9 +38,7 @@ const Home = ({navigation}:any) => {
 
     console.log(status);
 
-            
-
-
+        
     
     React.useLayoutEffect(() => {
         navigation.setOptions({headerShown: false});

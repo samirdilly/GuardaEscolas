@@ -3,7 +3,7 @@ import { RequestLogin } from "../types/requestLogin";
 
 import { connectionAPIPost } from "../functions/connection/connectionAPI";
 
-import { useNavigation } from "@react-navigation/native";
+import { StackActions, useNavigation } from "@react-navigation/native";
 import { setAuthorizationToken } from "../functions/connection/auth";
 import { ReturnLogin } from "../types/returnLogin";
 import { TextCadastro } from "../../modules/login/styles/Login.Styles";
@@ -20,7 +20,7 @@ export const useRequest =  () => {
   
    
     const authRequest = async (body: RequestLogin) => {
-        await connectionAPIPost<ReturnLogin>('https://ti.guaira.pr.gov.br/apijwt/login', body)
+        await connectionAPIPost<ReturnLogin>('https://ti.guaira.pr.gov.br/apijwt_teste/login', body)
         .then((result) => {
             setAuthorizationToken(result.token)
             
@@ -32,12 +32,13 @@ export const useRequest =  () => {
                 setNome(result.nome)
             }
             navigation.navigate("Home")
+            navigation.dispatch(StackActions.replace('Home')) 
         })
         .catch(() => {
             setErrorMessage('Usuário ou Senha inválidos');
         });
     };
-    console.log(nome)
+    
  
     
 
